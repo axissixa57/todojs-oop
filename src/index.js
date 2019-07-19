@@ -2,7 +2,11 @@
 import Model from './model';
 import View from './view';
 import Controller from './controller';
-
-const model = new Model();
-const view = new View(); 
+import { save, load } from './helpers';
+// load data from store
+const state = load();
+// если данных нет, присваиваем udef и в model.js срабатывает объявление массива по умолчанию
+const model = new Model(state || undefined);
+model.on('change', state => save(state));
+const view = new View();
 const controller = new Controller(model, view);

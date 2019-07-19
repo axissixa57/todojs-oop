@@ -79,6 +79,14 @@ class View extends EventEmitter { // extends EventEmitter - наследован
 
         this.emit('remove', id);
     }
+
+    show(todos) {
+        todos.forEach(todo => {
+            const listItem = this.createElement(todo);
+
+            this.list.appendChild(listItem);
+        });
+    }
     
     findListItem(id) {
         return this.list.querySelector(`[data-id="${id}"]`) // data-id - это атрибут, кот. нужен для поиска определённого пункта
